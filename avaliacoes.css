@@ -1,4 +1,15 @@
-/* avaliacoes.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9e5c8;
+  padding: 20px;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #d87f4a;
+}
+
 form {
   max-width: 500px;
   margin: auto;
@@ -38,4 +49,3 @@ button {
   padding: 20px;
   border-radius: 8px;
 }
-
