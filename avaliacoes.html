@@ -4,9 +4,20 @@
   <meta charset="UTF-8">
   <title>Avaliações - Biscuit</title>
   <link rel="stylesheet" href="estilo.css">
-</head>
-<body>
-  <h1>Avaliações dos nossos clientes</h1>
+  <header>
+    <div style="display: flex; align-items: center;">
+      <img src="https://raw.githubusercontent.com/AbdallahJaajoul/Biscuit/main/293406571_464018015726261_7839916373839900193_n.jpg" alt="Logo Biscuit" style="height: 40px; border-radius: 50%; margin-right: 10px;">
+      <h1 style="margin: 0; font-size: 20px;">Biscuit</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="sobrenos.html">Sobre Nós</a></li>
+        <li><a href="produtos.html">Produtos</a></li>
+        <li><a href="horários.html">Horário</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <form id="form-avaliacao" method="POST" action="guardar_avaliacao.php">
     <label for="nome">Nome:</label>
@@ -30,21 +41,5 @@
   <div id="lista-avaliacoes">
     <?php include 'listar_avaliacoes.php'; ?>
   </div>
-</body>
-
-  <header>
-    <div style="display: flex; align-items: center;">
-      <img src="https://raw.githubusercontent.com/AbdallahJaajoul/Biscuit/main/293406571_464018015726261_7839916373839900193_n.jpg" alt="Logo Biscuit" style="height: 40px; border-radius: 50%; margin-right: 10px;">
-      <h1 style="margin: 0; font-size: 20px;">Biscuit</h1>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="sobrenos.html">Sobre Nós</a></li>
-        <li><a href="produtos.html">Produtos</a></li>
-        <li><a href="horários.html">Horário</a></li>
-      </ul>
-    </nav>
-  </header>
-  
+</body> 
 </html>
