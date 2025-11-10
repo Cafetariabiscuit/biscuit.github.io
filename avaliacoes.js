@@ -1,7 +1,5 @@
-document.getElementById("form-avaliacao").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const firebaseConfig = {
+// Inicializar Firebase
+const firebaseConfig = {
   apiKey: "AIzaSyBcanFKEo5vYy_qptBTrp8gSqgM2gttd48",
   authDomain: "biscuit-avaliacoes.firebaseapp.com",
   databaseURL: "https://biscuit-avaliacoes-default-rtdb.firebaseio.com",
@@ -11,38 +9,43 @@ document.getElementById("form-avaliacao").addEventListener("submit", function(e)
   appId: "1:551726007541:web:9b7e47358ab57ccbd9f1bc"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-  
+const app = firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+// Enviar avaliação para Firebase
+document.getElementById("form-avaliacao").addEventListener("submit", function(e) {
+  e.preventDefault();
+
   const nome = document.getElementById("nome").value.trim();
   const comentario = document.getElementById("comentario").value.trim();
   const avaliacao = document.getElementById("avaliacao").value;
 
   if (!nome || !comentario || !avaliacao) return;
 
-  const nova = { nome, comentario, avaliacao };
-  const lista = JSON.parse(localStorage.getItem("avaliacoes") || "[]");
-  lista.push(nova);
-  localStorage.setItem("avaliacoes", JSON.stringify(lista));
+  db.ref("avaliacoes").push({ nome, comentario, avaliacao });
 
   document.getElementById("form-avaliacao").reset();
-  mostrarAvaliacoes();
 });
 
+// Mostrar avaliações do Firebase
 function mostrarAvaliacoes() {
-  const lista = JSON.parse(localStorage.getItem("avaliacoes") || "[]");
   const container = document.getElementById("lista-avaliacoes");
   container.innerHTML = "";
 
-  lista.forEach(av => {
-    const bloco = document.createElement("div");
-    bloco.innerHTML = `
-      <strong>${av.nome}</strong><br>
-      ${"⭐".repeat(av.avaliacao)}<br>
-      <p>${av.comentario}</p>
-      <hr>
-    `;
-    container.appendChild(bloco);
+  db.ref("avaliacoes").on("value", snapshot => {
+    container.innerHTML = "";
+    snapshot.forEach(child => {
+      const av = child.val();
+      const bloco = document.createElement("div");
+      bloco.innerHTML = `
+        <strong>${av.nome}</strong><br>
+        ${"⭐".repeat(av.avaliacao)}<br>
+        <p>${av.comentario}</p>
+        <hr>
+      `;
+      container.appendChild(bloco);
+    });
   });
 }
+
 mostrarAvaliacoes();
