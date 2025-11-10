@@ -9,7 +9,7 @@ const firebaseConfig = {
   appId: "1:551726007541:web:9b7e47358ab57ccbd9f1bc"
 };
 
-const app = firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
 // Enviar avaliação para Firebase
