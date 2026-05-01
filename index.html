@@ -1,99 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta name="google-site-verification" content="4KeQcqJaqnwPSgC35vOvSs5RXcw-1fQk7taqOzRr8MQ" />
-  <link rel="stylesheet" href="estilo.css">
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="4KeQcqJaqnwPSgC35vOvSs5RXcw-1fQk7taqOzRr8MQ">
   <title>Biscuit</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-image: url('https://raw.githubusercontent.com/Cafetariabiscuit/biscuit.github.io/main/Copilot_20260425_161314.png');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-attachment: fixed;
-      color: white;
-    }
-
-    .overlay {
-      background-color: rgba(0, 0, 0, 0.6);
-      min-height: 100vh;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-      margin: 0;
-      padding: 0;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-    }
-
-    .contacto {
-      text-align: center;
-      margin-top: auto;
-      padding-bottom: 40px;
-    }
-
-    .contacto p {
-      margin: 5px 0;
-      font-size: 18px;
-    }
-  </style>
+  <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-  <div class="overlay">
 
-<header>
-  <div class="imagem-fundo" style="position: relative;">
-    
-  </div>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="https://raw.githubusercontent.com/AbdallahJaajoul/Biscuit/main/293406571_464018015726261_7839916373839900193_n.jpg" alt="Logo Biscuit">
+        <h1>Biscuit</h1>
+      </div>
 
-  <nav style="position: relative; z-index: 1;">
-    <ul>
-      <li><a href="sobrenos.html">Sobre Nós</a></li>
-      <li><a href="produtos.html">Produtos</a></li>
-      <li><a href="bolos.html">Bolos</a></li>
-      <li><a href="avaliacoes.html">Avaliações</a></li>
-      <li><a href="horários.html">Horários</a></li>
-    </ul>
-  </nav>
-</header>
-
-<!-- Destaque -->
-<div class="video-destaque" style="text-align: center; margin: 40px auto;">
-  <h2 style="color: #ffd699;">Momentos na Biscuit</h2>
-
-</div>
-
-    
-    <!-- Contato no centro -->
-    <div class="contacto">
-      <p>Email: <a href="mailto:biscuit.geral@gmail.com" style="color: #ffd699;">biscuit.geral@gmail.com</a></p>
-      <p>Telefone: 223 240 203 (custo de chamada nacional)</p>
-      <p><strong>Morada:</strong><br>
-      R. da Ferraria 239, 4435-250 Rio Tinto<br>
-      Parque Urbano, Av. do Rio Tinto, 4435-318 <br>
-      Rio Tinto / Gondomar</p>
+      <nav class="nav">
+        <ul>
+          <li><a class="ativo" href="index.html">Início</a></li>
+          <li><a href="sobrenos.html">Sobre Nós</a></li>
+          <li><a href="produtos.html">Produtos</a></li>
+          <li><a href="bolos.html">Bolos</a></li>
+          <li><a href="avaliacoes.html">Avaliações</a></li>
+          <li><a href="horários.html">Horário</a></li>
+        </ul>
+      </nav>
     </div>
-  </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h2>Momentos na Biscuit</h2>
+        <p>Bolos personalizados, peças artesanais e sabores pensados para tornar cada celebração inesquecível.</p>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="card contacto">
+        <p>Email: <a href="mailto:biscuit.geral@gmail.com" style="color: #ffd699;">biscuit.geral@gmail.com</a></p>
+        <p>Telefone: 223 240 203 (custo de chamada nacional)</p>
+        <p><strong>Morada:</strong><br>
+          R. da Ferraria 239, 4435-250 Rio Tinto<br>
+          Parque Urbano, Av. do Rio Tinto, 4435-318<br>
+          Rio Tinto / Gondomar
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Biscuit. Todos os direitos reservados.</p>
+  </footer>
+
 </body>
 </html>
