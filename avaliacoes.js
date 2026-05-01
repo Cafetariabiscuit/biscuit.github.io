@@ -15,7 +15,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 const form = document.getElementById("form-avaliacao");
-const container = document.getElementById("lista-avaliacoes");
+const lista = document.getElementById("lista-avaliacoes");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -37,23 +37,29 @@ form.addEventListener("submit", (e) => {
 });
 
 onValue(ref(db, "avaliacoes"), (snapshot) => {
-  container.innerHTML = "";
+  lista.innerHTML = "";
 
   if (!snapshot.exists()) {
-    container.innerHTML = "<p>Sem avaliações ainda.</p>";
+    lista.innerHTML = "<p style='text-align:center;'>Ainda não existem avaliações.</p>";
     return;
   }
 
+  const avaliacoes = [];
   snapshot.forEach((child) => {
-    const av = child.val();
-    const bloco = document.createElement("div");
-    bloco.className = "avaliacao-item";
-    bloco.innerHTML = `
+    avaliacoes.push(child.val());
+  });
+
+  avaliacoes.reverse();
+
+  avaliacoes.forEach((av) => {
+    const item = document.createElement("div");
+    item.className = "card";
+    item.style.marginBottom = "12px";
+    item.innerHTML = `
       <strong>${av.nome}</strong><br>
-      ${"⭐".repeat(av.avaliacao)}<br>
-      <p>${av.comentario}</p>
-      <hr>
+      <span style="color:#f5a623;">${"⭐".repeat(av.avaliacao)}</span>
+      <p style="margin:8px 0 0;">${av.comentario}</p>
     `;
-    container.appendChild(bloco);
+    lista.appendChild(item);
   });
 });
