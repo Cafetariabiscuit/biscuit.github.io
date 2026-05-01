@@ -159,6 +159,48 @@ a {
   margin-top: 0;
 }
 
+.redes-sociais {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.redes-sociais h2 {
+  color: #a0522d;
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e29f81, #ffa64d);
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.social-links a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.16);
+}
+
+.social-links i {
+  font-size: 18px;
+}
+
 .contacto {
   text-align: center;
   margin-top: 30px;
