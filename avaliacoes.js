@@ -1,4 +1,6 @@
-// Inicializar Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBcanFKEo5vYy_qptBTrp8gSqgM2gttd48",
   authDomain: "biscuit-avaliacoes.firebaseapp.com",
@@ -9,14 +11,13 @@ const firebaseConfig = {
   appId: "1:551726007541:web:9b7e47358ab57ccbd9f1bc"
 };
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
 const app = initializeApp(firebaseConfig);
-const db = firebase.database();
+const db = getDatabase(app);
 
-// Enviar avaliação para Firebase
-document.getElementById("form-avaliacao").addEventListener("submit", function(e) {
+const form = document.getElementById("form-avaliacao");
+const container = document.getElementById("lista-avaliacoes");
+
+form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const nome = document.getElementById("nome").value.trim();
@@ -25,30 +26,34 @@ document.getElementById("form-avaliacao").addEventListener("submit", function(e)
 
   if (!nome || !comentario || !avaliacao) return;
 
-  db.ref("avaliacoes").push({ nome, comentario, avaliacao });
+  push(ref(db, "avaliacoes"), {
+    nome,
+    comentario,
+    avaliacao: Number(avaliacao),
+    data: Date.now()
+  });
 
-  document.getElementById("form-avaliacao").reset();
+  form.reset();
 });
 
-// Mostrar avaliações do Firebase
-function mostrarAvaliacoes() {
-  const container = document.getElementById("lista-avaliacoes");
+onValue(ref(db, "avaliacoes"), (snapshot) => {
   container.innerHTML = "";
 
-  db.ref("avaliacoes").on("value", snapshot => {
-    container.innerHTML = "";
-    snapshot.forEach(child => {
-      const av = child.val();
-      const bloco = document.createElement("div");
-      bloco.innerHTML = `
-        <strong>${av.nome}</strong><br>
-        ${"⭐".repeat(av.avaliacao)}<br>
-        <p>${av.comentario}</p>
-        <hr>
-      `;
-      container.appendChild(bloco);
-    });
-  });
-}
+  if (!snapshot.exists()) {
+    container.innerHTML = "<p>Sem avaliações ainda.</p>";
+    return;
+  }
 
-mostrarAvaliacoes();
+  snapshot.forEach((child) => {
+    const av = child.val();
+    const bloco = document.createElement("div");
+    bloco.className = "avaliacao-item";
+    bloco.innerHTML = `
+      <strong>${av.nome}</strong><br>
+      ${"⭐".repeat(av.avaliacao)}<br>
+      <p>${av.comentario}</p>
+      <hr>
+    `;
+    container.appendChild(bloco);
+  });
+});
