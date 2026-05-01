@@ -3,72 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Horário</title>
+  <title>Horário - Biscuit</title>
   <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
 
-  <header>
-    <nav>
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="sobrenos.html">Sobre Nós</a></li>
-        <li><a href="produtos.html">Produtos</a></li>
-        <li><a href="avaliacoes.html">Avaliações</a></li>
-        <li><a href="bolos.html">Bolos</a></li>
-      </ul>
-    </nav>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="https://raw.githubusercontent.com/AbdallahJaajoul/Biscuit/main/293406571_464018015726261_7839916373839900193_n.jpg" alt="Logo Biscuit">
+        <h1>Biscuit</h1>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobrenos.html">Sobre Nós</a></li>
+          <li><a href="produtos.html">Produtos</a></li>
+          <li><a href="bolos.html">Bolos</a></li>
+          <li><a href="avaliacoes.html">Avaliações</a></li>
+          <li><a class="ativo" href="horários.html">Horário</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main class="horarios-container">
-    <h1>Horário das Lojas</h1>
+    <h1 class="section-title">Horário das Lojas</h1>
 
     <section class="local">
-      <h2>📍Parque Urbano, Av. do Rio Tinto</h2>
+      <h2>📍 Parque Urbano, Av. do Rio Tinto</h2>
       <table>
         <thead>
-          <tr>
-            <th>Dia</th>
-            <th>Horário</th>
-          </tr>
+          <tr><th>Dia</th><th>Horário</th></tr>
         </thead>
         <tbody>
-          <tr>
-            <td data-label="Dia">Segunda a Sexta</td>
-            <td data-label="Horário">8:00 – 22:00</td>
-          </tr>
-          <tr>
-            <td data-label="Dia">Sábado e Domingo</td>
-            <td data-label="Horário">9:00 – 00:00</td>
-          </tr>
+          <tr><td data-label="Dia">Segunda a Sexta</td><td data-label="Horário">8:00 – 22:00</td></tr>
+          <tr><td data-label="Dia">Sábado e Domingo</td><td data-label="Horário">9:00 – 00:00</td></tr>
         </tbody>
       </table>
     </section>
 
     <section class="local">
-      <h2>📍R. da Ferraria 239, Rio Tinto</h2>
+      <h2>📍 R. da Ferraria 239, Rio Tinto</h2>
       <table>
         <thead>
-          <tr>
-            <th>Dia</th>
-            <th>Horário</th>
-          </tr>
+          <tr><th>Dia</th><th>Horário</th></tr>
         </thead>
         <tbody>
-          <tr>
-            <td data-label="Dia">Segunda a Sábado</td>
-            <td data-label="Horário">7:00 – 20:00</td>
-          </tr>
-          <tr>
-            <td data-label="Dia">Domingo</td>
-            <td data-label="Horário">7:00 – 13:00</td>
-          </tr>
+          <tr><td data-label="Dia">Segunda a Sábado</td><td data-label="Horário">7:00 – 20:00</td></tr>
+          <tr><td data-label="Dia">Domingo</td><td data-label="Horário">7:00 – 13:00</td></tr>
         </tbody>
       </table>
     </section>
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <p>&copy; 2026 Biscuit. Todos os direitos reservados.</p>
   </footer>
 
