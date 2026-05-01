@@ -2,97 +2,61 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Avaliações - Biscuit</title>
   <link rel="stylesheet" href="estilo.css">
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
-  <script type="module" src="avaliacoes-firebase.js"></script>
 </head>
 <body>
 
-  <header>
-    <div style="display: flex; align-items: center;">
-      <img src="https://raw.githubusercontent.com/AbdallahJaajoul/Biscuit/main/293406571_464018015726261_7839916373839900193_n.jpg" alt="Logo Biscuit" style="height: 40px; border-radius: 50%; margin-right: 10px;">
-      <h1 style="margin: 0; font-size: 20px;">Biscuit</h1>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="https://raw.githubusercontent.com/AbdallahJaajoul/Biscuit/main/293406571_464018015726261_7839916373839900193_n.jpg" alt="Logo Biscuit">
+        <h1>Biscuit</h1>
+      </div>
+
+      <nav class="nav">
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobrenos.html">Sobre Nós</a></li>
+          <li><a href="produtos.html">Produtos</a></li>
+          <li><a href="bolos.html">Bolos</a></li>
+          <li><a class="ativo" href="avaliacoes.html">Avaliações</a></li>
+          <li><a href="horários.html">Horário</a></li>
+        </ul>
+      </nav>
     </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="sobrenos.html">Sobre Nós</a></li>
-        <li><a href="produtos.html">Produtos</a></li>
-        <li><a href="bolos.html">Bolos</a></li>
-        <li><a href="horários.html">Horário</a></li>
-      </ul>
-    </nav>
   </header>
 
-  <form id="form-avaliacao">
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" name="nome" required>
+  <main class="container">
+    <section class="card">
+      <h2 class="section-title" style="text-align:center;">Deixa a tua avaliação</h2>
 
-    <label for="comentario">Comentário:</label>
-    <textarea id="comentario" name="comentario" required></textarea>
+      <form id="form-avaliacao" style="display:grid; gap:14px; max-width:600px; margin:0 auto 30px;">
+        <input type="text" id="nome" placeholder="O teu nome" required style="padding:12px; border:1px solid #ccc; border-radius:10px;">
+        <textarea id="comentario" placeholder="Escreve o teu comentário" required rows="5" style="padding:12px; border:1px solid #ccc; border-radius:10px; resize:vertical;"></textarea>
+        <select id="avaliacao" required style="padding:12px; border:1px solid #ccc; border-radius:10px;">
+          <option value="">Escolhe a avaliação</option>
+          <option value="1">1 estrela</option>
+          <option value="2">2 estrelas</option>
+          <option value="3">3 estrelas</option>
+          <option value="4">4 estrelas</option>
+          <option value="5">5 estrelas</option>
+        </select>
+        <button type="submit" style="padding:12px; border:none; border-radius:10px; background:#e29f81; color:white; font-weight:bold; cursor:pointer;">
+          Enviar avaliação
+        </button>
+      </form>
 
-    <label for="avaliacao">Avaliação:</label>
-    <select id="avaliacao" name="avaliacao" required>
-      <option value="5">⭐⭐⭐⭐⭐ Excelente</option>
-      <option value="4">⭐⭐⭐⭐ Muito bom</option>
-      <option value="3">⭐⭐⭐ Bom</option>
-      <option value="2">⭐⭐ Razoável</option>
-      <option value="1">⭐ Fraco</option>
-    </select>
+      <h2 class="section-title" style="text-align:center;">Avaliações dos clientes</h2>
+      <div id="lista-avaliacoes" style="display:grid; gap:16px; max-width:700px; margin:0 auto;"></div>
+    </section>
+  </main>
 
-    <button type="submit">Enviar avaliação</button>
-  </form>
+  <footer class="site-footer">
+    <p>&copy; 2026 Biscuit. Todos os direitos reservados.</p>
+  </footer>
 
-  <div id="lista-avaliacoes"></div>
-
+  <script type="module" src="firebase-avaliacoes.js"></script>
 </body>
 </html>
-
-<div id="lista-avaliacoes">
-
-<div id="lista-avaliacoes" 
-     style="display: flex; flex-direction: column; align-items: center; gap: 25px; margin-top: 30px;">
-
-  <!-- Avaliação 1 -->
-  <iframe 
-    src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fanapaula.monteiro.963434%2Fposts%2Fpfbid02Q4huPhDYbgfXwidWcYkPng2grjQsRYuyHD2oibbf91cR41tnA42HcuNgGiqUMD7wl&show_text=true&width=500" 
-    width="500" height="207"
-    style="border:none;overflow:hidden;" scrolling="no" frameborder="0"
-    allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-  </iframe>
-
-  <!-- Avaliação 2 -->
-  <iframe 
-    src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fsonia.rosario.146%2Fposts%2Fpfbid02M2sqeATJ5wiqAeaprGACS5CajtBghVEoX6ipKoRwmBsSofQtGwQAHbRMPYrf5tuGl&show_text=true&width=500" 
-    width="500" height="164"
-    style="border:none;overflow:hidden;" scrolling="no" frameborder="0"
-    allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-  </iframe>
-
-  <!-- Avaliação 3 -->
-  <iframe 
-    src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmonica.torres.7543653%2Fposts%2Fpfbid0YGKLyXzD5YsdFfejanqrQRpnm9UY3Y9L5NySX4kH8d9JQ5JyLYHnu3Mi2TUk9P9il&show_text=true&width=500" 
-    width="500" height="203"
-    style="border:none;overflow:hidden;" scrolling="no" frameborder="0"
-    allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-  </iframe>
-
-  <!-- Avaliação 4 -->
-  <iframe 
-    src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fclaudia.sofia.guimaraes%2Fposts%2Fpfbid0oyTTiPjvUDemZeRHVUXoi4QLCHJ5WzqcHRqhCV5Lv75B6geD4y6B4LigTz3PWf5Xl&show_text=true&width=500" 
-    width="500" height="168"
-    style="border:none;overflow:hidden;" scrolling="no" frameborder="0"
-    allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-  </iframe>
-
-  <!-- Avaliação 5 -->
-  <iframe 
-    src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid02ftj5FKX4UMryL8cBD6ku28mNpXmvA2KnFkeXSR6CyCqpTuVr4uGLdHjKNBznVHMil%26id%3D100011059399106&show_text=true&width=500" 
-    width="500" height="184"
-    style="border:none;overflow:hidden;" scrolling="no" frameborder="0"
-    allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-  </iframe>
-
-</div>
