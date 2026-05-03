@@ -287,14 +287,46 @@ th {
 
   .nav ul {
     justify-content: center;
+    gap: 8px;
   }
 
-  .hero {
-    min-height: 45vh;
+  .nav a {
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+
+  .brand h1 {
+    font-size: 18px;
+  }
+
+  .hero-foto img {
+    max-height: 320px;
   }
 
   .contacto {
-    padding: 18px;
+    max-width: 340px;
+    padding: 14px 16px;
+  }
+
+  .contacto p {
+    font-size: 15px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .container {
+    padding: 16px 12px 32px;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+  }
+
+  .gallery img {
+    height: 140px;
   }
 
   table, thead, tbody, th, td, tr {
