@@ -197,18 +197,18 @@ a {
 
 .contacto {
   text-align: center;
-  margin-top: 30px;
-  padding: 24px;
+  margin-top: 20px auto 0;
+  padding: 18px 22px;
   background: rgba(0,0,0,0.35);
   border-radius: 16px;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 520px;
+  width: calc(100%-24px);
 }
 
 .contacto p {
-  margin: 10px 0;
-  font-size: 18px;
+  margin: 8px 0;
+  font-size: 17px;
+  line-height: 1.5;
 }
 
 .gallery {
@@ -282,6 +282,7 @@ th {
   .header-inner {
     flex-direction: column;
     align-items: center;
+    gap: 12px;
   }
 
   .nav ul {
