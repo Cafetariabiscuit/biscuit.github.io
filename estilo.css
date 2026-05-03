@@ -100,44 +100,38 @@ a {
   padding: 30px 20px 50px;
 }
 
-.hero {
-  position: relative;
-  min-height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.hero-foto {
+  width: 100%;
+  background: #fff;
+}
+
+.hero-foto img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height: 520px;
+}
+
+.intro-home {
   text-align: center;
-  color: white;
-  background-image: url('https://raw.githubusercontent.com/Cafetariabiscuit/biscuit.github.io/main/Copilot_20260425_161314.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  margin-bottom: 20px;
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
+.intro-home h2 {
+  margin-top: 0;
+  color: #a0522d;
+  font-size: clamp(24px, 4vw, 40px);
 }
 
-.hero-content {
-  position: relative;
-  z-index: 1;
-  padding: 40px 20px;
+.intro-home p {
+  font-size: 18px;
+  line-height: 1.6;
 }
 
-.hero h2 {
-  margin: 0 0 10px;
-  font-size: clamp(30px, 5vw, 52px);
-  color: white;
-}
-
-.hero p {
-  max-width: 700px;
-  margin: 0 auto;
-  font-size: 20px;
-  color: #f5f5f5;
+.contacto a {
+  color: #a0522d;
+  font-weight: bold;
 }
 
 .card {
