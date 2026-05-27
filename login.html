@@ -1,1 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login Admin</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <main class="container">
+    <section class="card" style="max-width:420px; margin:60px auto;">
+      <h1 style="text-align:center; margin-top:0;">Login Admin</h1>
 
+      <form id="form-login" style="display:grid; gap:14px;">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Palavra-passe" required>
+        <button type="submit" class="order-btn">Entrar</button>
+      </form>
+
+      <p id="msg-login" style="text-align:center; color:#b00020; margin-top:12px;"></p>
+    </section>
+  </main>
+
+  <script type="module" src="firebase-login.js"></script>
+</body>
+</html>
