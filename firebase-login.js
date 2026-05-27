@@ -27,7 +27,7 @@ form.addEventListener("submit", async (e) => {
   try {
     const cred = await signInWithEmailAndPassword(auth, email, password);
 
-    if (cred.user.email === "SEU_EMAIL_ADMIN_AQUI@gmail.com") {
+    if (cred.user.email === "abdullahmahercacul@gmail.com") {
       localStorage.setItem("adminLogged", "true");
       window.location.href = "admin.html";
     } else {
