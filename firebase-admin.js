@@ -18,7 +18,7 @@ const db = getDatabase(app);
 const lista = document.getElementById("lista-encomendas");
 
 onAuthStateChanged(auth, (user) => {
-  if (!user || user.email !== "SEU_EMAIL_ADMIN_AQUI@gmail.com") {
+  if (!user || user.email !== "abdullahmahercacul@gmail.com") {
     window.location.href = "login.html";
     return;
 }
