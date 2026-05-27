@@ -1,4 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig = {
@@ -12,9 +13,16 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const db = getDatabase(app);
 const lista = document.getElementById("lista-encomendas");
 
+onAuthStateChanged(auth, (user) => {
+  if (!user || user.email !== "SEU_EMAIL_ADMIN_AQUI@gmail.com") {
+    window.location.href = "login.html";
+    return;
+}
+  
 onValue(ref(db, "encomendas"), (snapshot) => {
   lista.innerHTML = "";
 
