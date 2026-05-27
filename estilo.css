@@ -205,6 +205,13 @@ a {
   width: calc(100% - 24px);
 }
 
+@media (max-width: 768px) {
+  .contacto {
+    margin: 16px auto 0;
+    max-width: 340px;
+    padding: 14px 16px;
+  }
+}
 .contacto p {
   margin: 8px 0;
   font-size: 17px;
