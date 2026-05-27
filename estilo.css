@@ -139,6 +139,7 @@ a {
   border-radius: 16px;
   box-shadow: var(--sombra);
   padding: 28px;
+  text-align: center;
 }
 
 .sobre-nos {
