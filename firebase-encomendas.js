@@ -36,4 +36,5 @@ form.addEventListener("submit", (e) => {
 
   push(ref(db, "encomendas"), dados);
   form.reset();
+  alert("Encomenda enviada com sucesso!");
 });
