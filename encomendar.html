@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Encomendar - Biscuit</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
 
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="https://raw.githubusercontent.com/AbdallahJaajoul/Biscuit/main/293406571_464018015726261_7839916373839900193_n.jpg" alt="Logo Biscuit">
+        <h1>Biscuit</h1>
+      </div>
+
+      <nav class="nav">
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobrenos.html">Sobre Nós</a></li>
+          <li><a href="produtos.html">Produtos</a></li>
+          <li><a href="bolos.html">Bolos</a></li>
+          <li><a href="avaliacoes.html">Avaliações</a></li>
+          <li><a href="horários.html">Horário</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h1 class="section-title" style="text-align:center;">Fazer Encomenda</h1>
+      <p style="text-align:center; max-width:700px; margin:0 auto 24px;">
+        Preenche os teus dados e nós entramos em contacto para confirmar a encomenda.
+      </p>
+
+      <form class="order-form">
+        <div class="form-grid">
+          <input type="text" placeholder="Nome completo" required>
+          <input type="tel" placeholder="Telefone" required>
+          <input type="email" placeholder="Email" required>
+
+          <select required>
+            <option value="">Escolhe o produto</option>
+            <option value="bolo">Bolo de aniversário</option>
+            <option value="doce">Doce</option>
+            <option value="artesanal">Produto artesanal</option>
+            <option value="outro">Outro</option>
+          </select>
+
+          <input type="number" placeholder="Quantidade" min="1" required>
+          <input type="text" placeholder="Sabor / modelo">
+          <input type="text" placeholder="Texto no bolo">
+          <input type="date" required>
+          <input type="time">
+
+          <select required>
+            <option value="">Levantamento ou entrega</option>
+            <option value="levantamento">Levantamento na loja</option>
+            <option value="entrega">Entrega</option>
+          </select>
+        </div>
+
+        <textarea placeholder="Observações, alergias ou pedidos especiais" rows="5"></textarea>
+
+        <button type="submit" class="order-btn">Enviar encomenda</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Biscuit. Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>
