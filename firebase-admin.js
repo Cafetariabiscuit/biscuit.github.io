@@ -16,6 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
+
 const lista = document.getElementById("lista-encomendas");
 const ADMIN_EMAIL = "abdullahmahercacul@gmail.com";
 
@@ -25,7 +26,9 @@ onAuthStateChanged(auth, (user) => {
     return;
   }
 
-  onValue(ref(db, "encomendas"), (snapshot) => {
+  const encomendasRef = ref(db, "encomendas");
+
+  onValue(encomendasRef, (snapshot) => {
     lista.innerHTML = "";
 
     if (!snapshot.exists()) {
@@ -34,12 +37,16 @@ onAuthStateChanged(auth, (user) => {
     }
 
     const encomendas = [];
-    snapshot.forEach((child) => encomendas.push(child.val()));
+    snapshot.forEach((child) => {
+      encomendas.push({ id: child.key, ...child.val() });
+    });
+
     encomendas.reverse();
 
     encomendas.forEach((e) => {
       const div = document.createElement("div");
       div.className = "card";
+      div.style.marginBottom = "16px";
       div.innerHTML = `
         <strong>${e.nome || "-"}</strong><br>
         <small>${e.telefone || "-"} | ${e.email || "-"}</small>
