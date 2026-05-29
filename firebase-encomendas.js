@@ -14,7 +14,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
-
 const form = document.getElementById("form-encomenda");
 
 form.addEventListener("submit", (e) => {
@@ -35,7 +34,13 @@ form.addEventListener("submit", (e) => {
     criadoEm: Date.now()
   };
 
-  push(ref(db, "encomendas"), dados);
-  form.reset();
-  alert("Encomenda enviada com sucesso!");
+  push(ref(db, "encomendas"), dados)
+    .then(() => {
+      form.reset();
+      alert("Encomenda enviada com sucesso!");
+    })
+    .catch((error) => {
+      console.log(error.code, error.message);
+      alert("Erro ao enviar encomenda.");
+    });
 });
