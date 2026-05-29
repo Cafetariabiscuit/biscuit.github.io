@@ -17,7 +17,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
 const lista = document.getElementById("lista-encomendas");
-const ADMIN_EMAIL = "SEU_EMAIL_ADMIN_AQUI@gmail.com";
+const ADMIN_EMAIL = "abdullahmahercacul@gmail.com";
 
 onAuthStateChanged(auth, (user) => {
   if (!user || user.email !== ADMIN_EMAIL) {
