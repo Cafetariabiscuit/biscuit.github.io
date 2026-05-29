@@ -2,13 +2,14 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBcanFKEo5vYy_qptBTrp8gSqgM2gttd48",
-  authDomain: "biscuit-avaliacoes.firebaseapp.com",
-  databaseURL: "https://biscuit-avaliacoes-default-rtdb.firebaseio.com",
-  projectId: "biscuit-avaliacoes",
-  storageBucket: "biscuit-avaliacoes.firebasestorage.app",
-  messagingSenderId: "551726007541",
-  appId: "1:551726007541:web:9b7e47358ab57ccbd9f1bc"
+  apiKey: "AIzaSyBl1uMOvD5zwvwnOoVBee5sQAx7J0nJyxA",
+  authDomain: "admin-biscuit.firebaseapp.com",
+  databaseURL: "https://admin-biscuit-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "admin-biscuit",
+  storageBucket: "admin-biscuit.firebasestorage.app",
+  messagingSenderId: "429461746107",
+  appId: "1:429461746107:web:91512d7afd7b1b8d7b949e",
+  measurementId: "G-KF4L1Y4L0D"
 };
 
 const app = initializeApp(firebaseConfig);
