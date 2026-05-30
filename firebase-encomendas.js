@@ -21,8 +21,10 @@ const msg = document.getElementById("msg-encomenda");
 if (form) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    if (msg) msg.textContent = "";
-
+    if (msg) { 
+      msg.textContent = "";
+      msg.style.color = "";
+    }
     const dados = {
       nome: document.getElementById("nome").value.trim(),
       telefone: document.getElementById("telefone").value.trim(),
@@ -48,7 +50,7 @@ if (form) {
         alert("Encomenda enviada com sucesso!");
       }
     } catch (error) {
-      console.log("Firebase error:", error.code, error.message);
+      console.error("Firebase error:", error);
       if (msg) {
         msg.style.color = "#b00020";
         msg.textContent = "Erro ao enviar encomenda.";
