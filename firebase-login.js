@@ -34,7 +34,7 @@ if (form) {
       if (cred.user && cred.user.email === ADMIN_EMAIL) {
         localStorage.setItem("adminLogged", "true");
         localStorage.setItem("adminEmail", cred.user.email);
-        window.location.href = "admin-encomendas.html";
+        window.location.href = "admin.html";
       } else {
         msg.style.color = "#b00020";
         msg.textContent = "Este utilizador não tem acesso de administrador.";
