@@ -1,5 +1,4 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig = {
@@ -13,53 +12,83 @@ const firebaseConfig = {
   measurementId: "G-KF4L1Y4L0D"
 };
 
+if (localStorage.getItem("adminLogged") !== "true") {
+  window.location.href = "login.html";
+}
+
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 const db = getDatabase(app);
 
 const lista = document.getElementById("lista-encomendas");
-const ADMIN_UID = "K69RNin3eNbRsGZOndOsUt3OzOD2";
+const adminEmail = document.getElementById("admin-email");
+const logoutBtn = document.getElementById("logout-btn");
 
-onAuthStateChanged(auth, (user) => {
-  if (!user || user.uid !== ADMIN_UID) {
+const email = localStorage.getItem("adminEmail") || "";
+if (adminEmail && email) {
+  adminEmail.textContent = `Sessão: ${email}`;
+}
+
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("adminLogged");
+    localStorage.removeItem("adminEmail");
     window.location.href = "login.html";
+  });
+}
+
+function formatarData(timestamp) {
+  if (!timestamp) return "-";
+  return new Date(timestamp).toLocaleString("pt-PT");
+}
+
+onValue(ref(db, "encomendas"), (snapshot) => {
+  const dados = snapshot.val();
+
+  if (!dados) {
+    lista.innerHTML = '<div class="empty">Nenhuma encomenda encontrada.</div>';
     return;
   }
 
-  const encomendasRef = ref(db, "encomendas");
+  const encomendas = Object.entries(dados).map(([id, item]) => ({ id, ...item }));
 
-  onValue(encomendasRef, (snapshot) => {
-    lista.innerHTML = "";
-
-    if (!snapshot.exists()) {
-      lista.innerHTML = "<p>Sem encomendas ainda.</p>";
-      return;
-    }
-
-    const encomendas = [];
-    snapshot.forEach((child) => {
-      encomendas.push({ id: child.key, ...child.val() });
-    });
-
-    encomendas.reverse();
-
-    encomendas.forEach((e) => {
-      const div = document.createElement("div");
-      div.className = "card";
-      div.style.marginBottom = "16px";
-      div.innerHTML = `
-        <strong>${e.nome || "-"}</strong><br>
-        <small>${e.telefone || "-"} | ${e.email || "-"}</small>
-        <p><strong>Produto:</strong> ${e.produto || "-"}</p>
-        <p><strong>Quantidade:</strong> ${e.quantidade || "-"}</p>
-        <p><strong>Sabor/Modelo:</strong> ${e.sabor || "-"}</p>
-        <p><strong>Texto:</strong> ${e.texto || "-"}</p>
-        <p><strong>Data:</strong> ${e.data || "-"}</p>
-        <p><strong>Hora:</strong> ${e.hora || "-"}</p>
-        <p><strong>Entrega:</strong> ${e.entrega || "-"}</p>
-        <p><strong>Observações:</strong> ${e.observacoes || "-"}</p>
-      `;
-      lista.appendChild(div);
-    });
-  });
+  lista.innerHTML = `
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>Produto</th>
+            <th>Qtd</th>
+            <th>Sabor</th>
+            <th>Texto</th>
+            <th>Data</th>
+            <th>Hora</th>
+            <th>Entrega</th>
+            <th>Observações</th>
+            <th>Criado em</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${encomendas.map((e) => `
+            <tr>
+              <td>${e.nome || ""}</td>
+              <td>${e.telefone || ""}</td>
+              <td>${e.email || ""}</td>
+              <td>${e.produto || ""}</td>
+              <td>${e.quantidade || ""}</td>
+              <td>${e.sabor || ""}</td>
+              <td>${e.texto || ""}</td>
+              <td>${e.data || ""}</td>
+              <td>${e.hora || ""}</td>
+              <td>${e.entrega || ""}</td>
+              <td>${e.observacoes || ""}</td>
+              <td>${formatarData(e.criadoEm)}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    </div>
+  `;
 });
