@@ -35,13 +35,13 @@
         Preenche os teus dados e nós entramos em contacto para confirmar a encomenda.
       </p>
 
-      <form class="order-form">
+      <form id="form-encomenda" class="order-form">
         <div class="form-grid">
-          <input type="text" placeholder="Nome completo" required>
-          <input type="tel" placeholder="Telefone" required>
-          <input type="email" placeholder="Email" required>
+          <input id="nome" type="text" placeholder="Nome completo" required>
+          <input id="telefone" type="tel" placeholder="Telefone" required>
+          <input id="email" type="email" placeholder="Email" required>
 
-          <select required>
+          <select id="produto" required>
             <option value="">Escolhe o produto</option>
             <option value="bolo">Bolo de aniversário</option>
             <option value="doce">Doce</option>
@@ -49,20 +49,22 @@
             <option value="outro">Outro</option>
           </select>
 
-          <input type="number" placeholder="Quantidade" min="1" required>
-          <input type="text" placeholder="Sabor / modelo">
-          <input type="text" placeholder="Texto no bolo">
-          <input type="date" required>
-          <input type="time">
+          <input id="quantidade" type="number" placeholder="Quantidade" min="1" required>
+          <input id="sabor" type="text" placeholder="Sabor / modelo">
+          <input id="texto" type="text" placeholder="Texto no bolo">
+          <input id="data" type="date" required>
+          <input id="hora" type="time">
 
-          <select required>
+          <select id="entrega" required>
             <option value="">Levantamento ou entrega</option>
             <option value="levantamento">Levantamento na loja</option>
             <option value="entrega">Entrega</option>
           </select>
         </div>
 
-        <textarea placeholder="Observações, alergias ou pedidos especiais" rows="5"></textarea>
+        <textarea id="observacoes" placeholder="Observações, alergias ou pedidos especiais" rows="5"></textarea>
+
+        <p id="msg-encomenda" style="text-align:center; margin:12px 0;"></p>
 
         <button type="submit" class="order-btn">Enviar encomenda</button>
       </form>
