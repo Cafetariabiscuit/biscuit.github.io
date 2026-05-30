@@ -19,33 +19,34 @@ const ADMIN_EMAIL = "abdullahmahercacul@gmail.com";
 const form = document.getElementById("form-login");
 const msg = document.getElementById("msg-login");
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  msg.textContent = "";
+if (form) {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    msg.textContent = "";
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-  try {
-    const cred = await signInWithEmailAndPassword(auth, email, password);
+    try {
+      const cred = await signInWithEmailAndPassword(auth, email, password);
 
-    if (cred.user.email === ADMIN_EMAIL) {
-      localStorage.setItem("adminLogged", "true");
-      window.location.href = "admin.html";
-    } else {
-      msg.textContent = "Este utilizador não tem acesso de administrador.";
+      if (cred.user.email === ADMIN_EMAIL) {
+        localStorage.setItem("adminLogged", "true");
+        localStorage.setItem("adminEmail", cred.user.email);
+        window.location.href = "admin.html";
+      } else {
+        msg.textContent = "Este utilizador não tem acesso de administrador.";
+      }
+    } catch (error) {
+      console.log("Firebase error:", error.code, error.message);
+
+      if (error.code === "auth/invalid-credential" || error.code === "auth/invalid-email") {
+        msg.textContent = "Email ou palavra-passe incorretos.";
+      } else if (error.code === "auth/network-request-failed") {
+        msg.textContent = "Erro de rede. Verifica a ligação.";
+      } else {
+        msg.textContent = "Erro no login. Vê a consola do navegador.";
+      }
     }
-  } catch (error) {
-    console.log("Firebase error:", error.code, error.message);
-
-    if (error.code === "auth/invalid-credential" || error.code === "auth/wrong-password" || error.code === "auth/user-not-found") {
-      msg.textContent = "Email ou palavra-passe incorretos.";
-    } else if (error.code === "auth/invalid-email") {
-      msg.textContent = "Email inválido.";
-    } else if (error.code === "auth/network-request-failed") {
-      msg.textContent = "Erro de rede. Verifica a ligação.";
-    } else {
-      msg.textContent = "Erro no login. Vê a consola do navegador.";
-    }
-  }
-});
+  });
+}
