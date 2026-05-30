@@ -5,14 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin - Encomendas</title>
   <link rel="stylesheet" href="estilo.css">
+  <style>
+    .admin-box {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .logout-btn {
+      background: #b00020;
+      color: #fff;
+      border: 0;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      opacity: 0.92;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1100px;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #eaeaea;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f5f5f5;
+    }
+
+    .muted {
+      color: #666;
+    }
+
+    .empty {
+      padding: 18px;
+      text-align: center;
+      color: #666;
+      background: #fff;
+      border-radius: 10px;
+    }
+  </style>
 </head>
 <body>
   <main class="container">
-    <section class="card">
-      <h1>Área de Administração</h1>
-      <div id="lista-encomendas"></div>
+    <section class="card admin-box">
+      <div class="topbar">
+        <div>
+          <h1 style="margin:0;">Área de Administração</h1>
+          <p id="admin-email" class="muted" style="margin:6px 0 0;"></p>
+        </div>
+        <button id="logout-btn" class="logout-btn">Sair</button>
+      </div>
+
+      <div id="lista-encomendas" class="muted">A carregar encomendas...</div>
     </section>
   </main>
+
   <script type="module" src="firebase-admin.js"></script>
 </body>
 </html>
