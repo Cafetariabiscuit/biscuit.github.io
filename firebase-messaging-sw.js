@@ -14,6 +14,6 @@ const messaging = firebase.messaging();
 messaging.onBackgroundMessage((payload) => {
   self.registration.showNotification(payload.notification.title, {
     body: payload.notification.body,
-    icon: "/icon.png"
+    icon: "https://raw.githubusercontent.com/AbdallahJaajoul/Biscuit/main/293406571_464018015726261_7839916373839900193_n.jpg"
   });
 });
