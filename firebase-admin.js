@@ -18,10 +18,10 @@ const auth = getAuth(app);
 const db = getDatabase(app);
 
 const lista = document.getElementById("lista-encomendas");
-const ADMIN_EMAIL = "abdullahmahercacul@gmail.com";
+const ADMIN_UID = "K69RNin3eNbRsGZOndOsUt3OzOD2";
 
 onAuthStateChanged(auth, (user) => {
-  if (!user || user.email !== ADMIN_EMAIL) {
+  if (!user || user.uid !== ADMIN_UID) {
     window.location.href = "login.html";
     return;
   }
