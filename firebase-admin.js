@@ -90,5 +90,47 @@ onValue(ref(db, "encomendas"), (snapshot) => {
         </tbody>
       </table>
     </div>
-  `;
+
+let primeiraVez = true; 
+
+const audioNotificacao = new Audio("notificacao.mp3");
+
+function mostrarPopup(mensagem) {
+  const popup = document.createElement("div");
+  popup.textContent = mensagem;
+  popup.style.position = "fixed";
+  popup.style.bottom = "20px";
+  popup.style.right = "20px";
+  popup.style.background = "#ff4081";
+  popup.style.color = "white";
+  popup.style.padding = "14px 20px";
+  popup.style.borderRadius = "8px";
+  popup.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
+  popup.style.fontSize = "16px";
+  popup.style.zIndex = "9999";
+  popup.style.opacity = "0";
+  popup.style.transition = "opacity 0.4s ease";
+
+  document.body.appendChild(popup);
+
+  setTimeout(() => popup.style.opacity = "1", 50);
+  setTimeout(() => {
+    popup.style.opacity = "0";
+    setTimeout(() => popup.remove(), 400);
+  }, 3500);
+}
+
+let ultimaContagem = 0;
+
+onValue(ref(db, "encomendas"), (snap) => {
+  const dados = snap.val() || {};
+  const total = Object.keys(dados).length;
+
+  if (!primeiraVez && total > ultimaContagem) {
+    audioNotificacao.play();
+    mostrarPopup("📦 Nova encomenda recebida!");
+  }
+
+  primeiraVez = false;
+  ultimaContagem = total;
 });
