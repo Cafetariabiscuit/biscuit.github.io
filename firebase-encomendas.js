@@ -14,32 +14,47 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
+
 const form = document.getElementById("form-encomenda");
+const msg = document.getElementById("msg-encomenda");
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+if (form) {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (msg) msg.textContent = "";
 
-  const dados = {
-    nome: document.getElementById("nome").value.trim(),
-    telefone: document.getElementById("telefone").value.trim(),
-    email: document.getElementById("email").value.trim(),
-    produto: document.getElementById("produto").value,
-    quantidade: document.getElementById("quantidade").value,
-    sabor: document.getElementById("sabor").value.trim(),
-    texto: document.getElementById("texto").value.trim(),
-    data: document.getElementById("data").value,
-    hora: document.getElementById("hora").value,
-    entrega: document.getElementById("entrega").value,
-    observacoes: document.getElementById("observacoes").value.trim(),
-    criadoEm: Date.now()
-  };
+    const dados = {
+      nome: document.getElementById("nome").value.trim(),
+      telefone: document.getElementById("telefone").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      produto: document.getElementById("produto").value,
+      quantidade: document.getElementById("quantidade").value,
+      sabor: document.getElementById("sabor").value.trim(),
+      texto: document.getElementById("texto").value.trim(),
+      data: document.getElementById("data").value,
+      hora: document.getElementById("hora").value,
+      entrega: document.getElementById("entrega").value,
+      observacoes: document.getElementById("observacoes").value.trim(),
+      criadoEm: Date.now()
+    };
 
-  try {
-    await push(ref(db, "encomendas"), dados);
-    form.reset();
-    alert("Encomenda enviada com sucesso!");
-  } catch (error) {
-    console.log("Firebase write error:", error.code, error.message);
-    alert("Erro ao enviar encomenda.");
-  }
-});
+    try {
+      await push(ref(db, "encomendas"), dados);
+      form.reset();
+      if (msg) {
+        msg.style.color = "#0a7a2f";
+        msg.textContent = "Encomenda enviada com sucesso!";
+      } else {
+        alert("Encomenda enviada com sucesso!");
+      }
+    } catch (error) {
+      console.log("Firebase error:", error.code, error.message);
+      if (msg) {
+        msg.style.color = "#b00020";
+        msg.textContent = "Erro ao enviar encomenda.";
+      } else {
+        alert("Erro ao enviar encomenda.");
+      }
+    }
+  });
+}
