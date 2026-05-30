@@ -40,7 +40,7 @@ form.addEventListener("submit", (e) => {
       alert("Encomenda enviada com sucesso!");
     })
     .catch((error) => {
-      console.log("Firebase write error:", error.code, error.message);
+      console.log(error.code, error.message);
       alert("Erro ao enviar encomenda.");
     });
 });
