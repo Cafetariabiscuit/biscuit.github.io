@@ -52,7 +52,7 @@ if (form) {
       } else if (error.code === "auth/network-request-failed") {
         msg.textContent = "Erro de rede. Verifica a ligação.";
       } else {
-        msg.textContent = "Erro no login. Vê a consola do navegador para mais detalhes.";
+        msg.textContent = "Erro no login. Email inválido, não faz parte de administradores!";
       }
     }
   });
