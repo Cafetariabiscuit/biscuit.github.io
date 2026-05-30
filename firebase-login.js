@@ -22,31 +22,37 @@ const msg = document.getElementById("msg-login");
 if (form) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    msg.textContent = "";
+    if (msg) msg.textContent = "";
 
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
 
-    try {
-      const cred = await signInWithEmailAndPassword(auth, email, password);
+try {
+  const cred = await signInWithEmailAndPassword(auth, email, password);
 
-      if (cred.user.email === ADMIN_EMAIL) {
-        localStorage.setItem("adminLogged", "true");
-        localStorage.setItem("adminEmail", cred.user.email);
-        window.location.href = "admin.html";
-      } else {
-        msg.textContent = "Este utilizador não tem acesso de administrador.";
-      }
-    } catch (error) {
-      console.log("Firebase error:", error.code, error.message);
+  // Verifica se o email do utilizador corresponde ao admin definido
+  if (cred.user && cred.user.email === ADMIN_EMAIL) {
+    localStorage.setItem("adminLogged", "true");
+    localStorage.setItem("adminEmail", cred.user.email);
+    window.location.href = "admin.html";
+  } else {
+    msg.style.color = "#b00020";
+    msg.textContent = "Este utilizador não tem acesso de administrador.";
+  }
+} catch (error) {
+  console.log("Firebase error:", error.code, error.message);
 
-      if (error.code === "auth/invalid-credential" || error.code === "auth/invalid-email") {
-        msg.textContent = "Email ou palavra-passe incorretos.";
-      } else if (error.code === "auth/network-request-failed") {
-        msg.textContent = "Erro de rede. Verifica a ligação.";
-      } else {
-        msg.textContent = "Erro no login. Vê a consola do navegador.";
-      }
-    }
-  });
+  msg.style.color = "#b00020";
+
+  if (error.code === "auth/invalid-email") {
+    msg.textContent = "Email inválido. Verifica o formato do email.";
+  } else if (error.code === "auth/wrong-password") {
+    msg.textContent = "Palavra-passe incorreta.";
+  } else if (error.code === "auth/user-not-found") {
+    msg.textContent = "Utilizador não encontrado.";
+  } else if (error.code === "auth/network-request-failed") {
+    msg.textContent = "Erro de rede. Verifica a ligação.";
+  } else {
+    msg.textContent = "Erro no login. Vê a consola do navegador para mais detalhes.";
+  }
 }
