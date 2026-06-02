@@ -314,44 +314,21 @@ a {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 15px;
+  overflow: hidden;
+  border-radius: 10px;
 }
 
 th, td {
-  padding: 8px;
+  padding: 14px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #eee;
 }
 
-@media (max-width: 768px) {
-  table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
+th {
+  background: #f6e4da;
+  color: #5a2f17;
+}
 
-  th, td {
-    padding: 10px 6px;
-    font-size: 14px;
-  }
-
-  thead {
-    background-color: #f8f8f8;
-    position: sticky;
-    top: 0;
-    z-index: 2;
-  }
-
-  @media (max-width: 480px) {
-  table {
-    font-size: 13px;
-  }
-
-  th {
-    background-color: #ffcc99;
-    color: #333;
-  }
-    
 .site-footer {
   background: linear-gradient(90deg, var(--cor-principal), var(--cor-secundaria));
   color: white;
