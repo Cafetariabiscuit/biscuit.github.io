@@ -1,31 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-async function ativarNotificacoesAdmin() {
-  if (!("Notification" in window)) return;
-
-  const perm = await Notification.requestPermission();
-  if (perm !== "granted") return;
-
-  await navigator.serviceWorker.register("admin-sw.js");
-}
-
-ativarNotificacoesAdmin();
-
-function notificarAdmin(titulo, mensagem) {
-  if (Notification.permission !== "granted") return;
-
-  navigator.serviceWorker.getRegistration().then(reg => {
-    if (!reg) return;
-
-    reg.showNotification(titulo, {
-      body: mensagem,
-      icon: "favicon.png",
-      badge: "favicon.png"
-    });
-  });
-}
-
 const firebaseConfig = {
   apiKey: "AIzaSyBl1uMOvD5zwvwnOoVBee5sQAx7J0nJyxA",
   authDomain: "admin-biscuit.firebaseapp.com",
@@ -67,30 +42,15 @@ function formatarData(timestamp) {
 }
 
 onValue(ref(db, "encomendas"), (snapshot) => {
-  const dados = snapshot.val() || {};
-  const total = Object.keys(dados).length;
+  const dados = snapshot.val();
 
-  if (total === 0) {
+  if (!dados) {
     lista.innerHTML = '<div class="empty">Nenhuma encomenda encontrada.</div>';
     return;
   }
 
-  const chaves = Object.keys(dados);
-  const ultima = dados[chaves[chaves.length - 1]];
-
-  if (!primeiraVez && total > ultimaContagem) {
-    notificarAdmin(
-      "Nova Encomenda Biscuit",
-      `${ultima.nome} fez uma encomenda (${ultima.produto})`
-    );
-  }
-
-  primeiraVez = false;
-  ultimaContagem = total;
-
   const encomendas = Object.entries(dados).map(([id, item]) => ({ id, ...item }));
 
-  function mostrarEncomendas(encomendas) {
   lista.innerHTML = `
     <div class="table-wrap">
       <table>
