@@ -12,9 +12,14 @@ const firebaseConfig = {
   measurementId: "G-KF4L1Y4L0D"
 };
 
-if (localStorage.getItem("adminLogged") !== "true") {
-  window.location.href = "login.html";
-}
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+const auth = getAuth();
+
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.href = "login.html";
+  }
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
