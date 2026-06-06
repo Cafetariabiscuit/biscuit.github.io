@@ -90,8 +90,7 @@ onValue(ref(db, "encomendas"), (snapshot) => {
 
   const encomendas = Object.entries(dados).map(([id, item]) => ({ id, ...item }));
 
-  mostrarEncomendas(encomendas);
-
+  function mostrarEncomendas(encomendas) {
   lista.innerHTML = `
     <div class="table-wrap">
       <table>
