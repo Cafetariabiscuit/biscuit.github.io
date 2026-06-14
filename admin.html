@@ -4,8 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin - Encomendas</title>
+
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="estilo.css">
+
   <style>
     .admin-box {
       max-width: 1200px;
@@ -43,7 +45,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 1100px;
+      min-width: 1200px;
       background: #fff;
       border-radius: 10px;
       overflow: hidden;
@@ -71,23 +73,55 @@
       background: #fff;
       border-radius: 10px;
     }
+
+    .btn-confirmar {
+      background: #007bff;
+      color: white;
+      border: 0;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn-confirmar:hover {
+      opacity: 0.9;
+    }
+
+    .btn-apagar {
+      background: #b00020;
+      color: white;
+      border: 0;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn-apagar:hover {
+      opacity: 0.9;
+    }
   </style>
 </head>
+
 <body>
   <main class="container">
     <section class="card admin-box">
+
       <div class="topbar">
         <div>
           <h1 style="margin:0;">Área de Administração</h1>
           <p id="admin-email" class="muted" style="margin:6px 0 0;"></p>
         </div>
+
         <button id="logout-btn" class="logout-btn">Sair</button>
       </div>
 
       <div id="lista-encomendas" class="muted">A carregar encomendas...</div>
+
     </section>
   </main>
 
+  <!-- Firebase Admin Script -->
   <script type="module" src="firebase-admin.js"></script>
+
 </body>
 </html>
