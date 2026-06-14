@@ -8,8 +8,8 @@ admin.initializeApp();
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "TEU_EMAIL@gmail.com",
-    pass: "PALAVRA_PASSE_APP"
+    user: "abdullahmahercacul@gmail.com",
+    pass: "2005Abdo@#2005Abdo"
   }
 });
 
@@ -22,7 +22,7 @@ exports.enviarConfirmacao = functions.https.onCall(async (data, context) => {
   const { email, nome } = data;
 
   const mailOptions = {
-    from: "Biscuit <TEU_EMAIL@gmail.com>",
+    from: "Biscuit <abdullahmahercacul@gmail.com>",
     to: email,
     subject: "Confirmação da sua encomenda",
     text: `Olá ${nome}, a sua encomenda foi confirmada! Obrigado pela preferência.`
