@@ -68,8 +68,11 @@ onValue(ref(db, "encomendas"), (snapshot) => {
             <th>Entrega</th>
             <th>Observações</th>
             <th>Criado em</th>
+            <th>Confirmar</th>
+            <th>Apagar</th>
           </tr>
         </thead>
+
         <tbody>
           ${encomendas.map((e) => `
             <tr>
@@ -85,10 +88,59 @@ onValue(ref(db, "encomendas"), (snapshot) => {
               <td>${e.entrega || ""}</td>
               <td>${e.observacoes || ""}</td>
               <td>${formatarData(e.criadoEm)}</td>
+
+              <td>
+                ${e.confirmado
+                  ? "<span style='color:green;font-weight:bold;'>✔ Confirmado</span>"
+                  : `<button class="btn-confirmar" data-id="${e.id}" data-email="${e.email}" data-nome="${e.nome}">Confirmar</button>`
+                }
+              </td>
+
+              <td>
+                <button class="btn-apagar" data-id="${e.id}">Apagar</button>
+              </td>
             </tr>
           `).join("")}
         </tbody>
       </table>
     </div>
   `;
+
+  // ===============================
+  // 8. LISTENER: CONFIRMAR ENCOMENDA
+  // ===============================
+  document.querySelectorAll(".btn-confirmar").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const id = btn.dataset.id;
+      const email = btn.dataset.email;
+      const nome = btn.dataset.nome;
+
+      // 1) Marcar como confirmada
+      await update(ref(db, "encomendas/" + id), {
+        confirmado: true
+      });
+
+      // 2) Chamar Cloud Function
+      const enviarConfirmacao = httpsCallable(functions, "enviarConfirmacao");
+      await enviarConfirmacao({ email, nome });
+
+      alert("Encomenda confirmada e email enviado!");
+    });
+  });
+
+  // ===============================
+  // 9. LISTENER: APAGAR ENCOMENDA
+  // ===============================
+  document.querySelectorAll(".btn-apagar").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const id = btn.dataset.id;
+
+      if (!confirm("Tens a certeza que queres apagar esta encomenda?")) return;
+
+      await remove(ref(db, "encomendas/" + id));
+
+      alert("Encomenda apagada!");
+    });
+  });
+
 });
