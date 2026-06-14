@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBl1uMOvD5zwvwnOoVBee5sQAx7J0nJyxA",
@@ -18,6 +19,14 @@ if (localStorage.getItem("adminLogged") !== "true") {
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, (user) => {
+  if (!user || user.email !== "abdullahmahercacul@gmail.com") {
+    window.location.href = "login.html";
+  } else {
+    document.getElementById("admin-email").textContent = `Sessão: ${user.email}`;
+  }
 
 const lista = document.getElementById("lista-encomendas");
 const adminEmail = document.getElementById("admin-email");
