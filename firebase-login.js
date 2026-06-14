@@ -14,45 +14,61 @@ const firebaseConfig = {
 
 const ADMIN_EMAIL = "abdullahmahercacul@gmail.com";
 
+// ===============================
+// 3. INICIALIZAR FIREBASE
+// ===============================
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+// ===============================
+// 4. ELEMENTOS DO HTML
+// ===============================
 const form = document.getElementById("form-login");
 const msg = document.getElementById("msg-login");
 
+// ===============================
+// 5. LOGIN REAL COM FIREBASE AUTH
+// ===============================
 if (form) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    if (msg) { msg.textContent = ""; msg.style.color = ""; }
+
+    msg.textContent = "";
+    msg.style.color = "";
 
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
 
     try {
+      // LOGIN REAL
       const cred = await signInWithEmailAndPassword(auth, email, password);
 
+      // VERIFICAR SE É O ADMIN
       if (cred.user && cred.user.email === ADMIN_EMAIL) {
-        localStorage.setItem("adminLogged", "true");
-        localStorage.setItem("adminEmail", cred.user.email);
         window.location.href = "admin.html";
       } else {
         msg.style.color = "#b00020";
         msg.textContent = "Este utilizador não tem acesso de administrador.";
       }
+
     } catch (error) {
       console.log("Firebase error:", error.code, error.message);
       msg.style.color = "#b00020";
 
       if (error.code === "auth/invalid-email") {
-        msg.textContent = "Email inválido. Verifica o formato do email.";
-      } else if (error.code === "auth/wrong-password") {
+        msg.textContent = "Email inválido. Verifica o formato.";
+      } 
+      else if (error.code === "auth/wrong-password") {
         msg.textContent = "Palavra-passe incorreta.";
-      } else if (error.code === "auth/user-not-found") {
+      }
+      else if (error.code === "auth/user-not-found") {
         msg.textContent = "Utilizador não encontrado.";
-      } else if (error.code === "auth/network-request-failed") {
+      }
+      else if (error.code === "auth/network-request-failed") {
         msg.textContent = "Erro de rede. Verifica a ligação.";
-      } else {
-        msg.textContent = "Erro no login. Email inválido, não faz parte de administradores!";
+      }
+      else {
+        msg.textContent = "Erro no login. Tenta novamente.";
       }
     }
   });
