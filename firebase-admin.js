@@ -1,6 +1,13 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { 
+  getDatabase, ref, onValue, update, remove 
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { 
+  getAuth, onAuthStateChanged, signOut 
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { 
+  getFunctions, httpsCallable 
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-functions.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBl1uMOvD5zwvwnOoVBee5sQAx7J0nJyxA",
@@ -13,42 +20,44 @@ const firebaseConfig = {
   measurementId: "G-KF4L1Y4L0D"
 };
 
-if (localStorage.getItem("adminLogged") !== "true") {
-  window.location.href = "login.html";
-}
-
+// ===============================
+// 2. INICIALIZAR FIREBASE
+// ===============================
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth(app);
+const functions = getFunctions(app);
 
+// ===============================
+// 3. PROTEÇÃO DO ADMIN
+// ===============================
 onAuthStateChanged(auth, (user) => {
   if (!user || user.email !== "abdullahmahercacul@gmail.com") {
     window.location.href = "login.html";
   } else {
     document.getElementById("admin-email").textContent = `Sessão: ${user.email}`;
   }
+});
 
-const lista = document.getElementById("lista-encomendas");
-const adminEmail = document.getElementById("admin-email");
-const logoutBtn = document.getElementById("logout-btn");
+// ===============================
+// 4. LOGOUT
+// ===============================
+document.getElementById("logout-btn").addEventListener("click", () => {
+  signOut(auth);
+});
 
-const email = localStorage.getItem("adminEmail") || "";
-if (adminEmail && email) {
-  adminEmail.textContent = `Sessão: ${email}`;
-}
-
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", () => {
-    localStorage.removeItem("adminLogged");
-    localStorage.removeItem("adminEmail");
-    window.location.href = "login.html";
-  });
-}
-
+// ===============================
+// 5. FORMATAR DATA
+// ===============================
 function formatarData(timestamp) {
   if (!timestamp) return "-";
   return new Date(timestamp).toLocaleString("pt-PT");
 }
+
+// ===============================
+// 6. LISTAR ENCOMENDAS
+// ===============================
+const lista = document.getElementById("lista-encomendas");
 
 onValue(ref(db, "encomendas"), (snapshot) => {
   const dados = snapshot.val();
@@ -116,7 +125,7 @@ onValue(ref(db, "encomendas"), (snapshot) => {
   `;
 
   // ===============================
-  // 8. LISTENER: CONFIRMAR ENCOMENDA
+  // 7. CONFIRMAR ENCOMENDA
   // ===============================
   document.querySelectorAll(".btn-confirmar").forEach(btn => {
     btn.addEventListener("click", async () => {
@@ -124,12 +133,10 @@ onValue(ref(db, "encomendas"), (snapshot) => {
       const email = btn.dataset.email;
       const nome = btn.dataset.nome;
 
-      // 1) Marcar como confirmada
       await update(ref(db, "encomendas/" + id), {
         confirmado: true
       });
 
-      // 2) Chamar Cloud Function
       const enviarConfirmacao = httpsCallable(functions, "enviarConfirmacao");
       await enviarConfirmacao({ email, nome });
 
@@ -138,7 +145,7 @@ onValue(ref(db, "encomendas"), (snapshot) => {
   });
 
   // ===============================
-  // 9. LISTENER: APAGAR ENCOMENDA
+  // 8. APAGAR ENCOMENDA
   // ===============================
   document.querySelectorAll(".btn-apagar").forEach(btn => {
     btn.addEventListener("click", async () => {
